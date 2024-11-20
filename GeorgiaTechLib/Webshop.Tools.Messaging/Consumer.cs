@@ -7,8 +7,8 @@ namespace Webshop.Tools.Messaging
 {
     public class Consumer<T> : Connection
     {
-        readonly Action<T> onConsume;
-        public Consumer(Action<T> _onConsume, string _queue, string _hostname = "localhost") : base(_queue, _hostname)
+        readonly Action<Message<T>> onConsume;
+        public Consumer(Action<Message<T>> _onConsume, string _queue, string _hostname = "localhost") : base(_queue, _hostname)
         {
             onConsume = _onConsume;
         }
@@ -28,7 +28,7 @@ namespace Webshop.Tools.Messaging
                     string message = Encoding.UTF8.GetString(body);
 
                     Message<T> parsedMessage = JsonSerializer.Deserialize<Message<T>>(message) ?? throw new Exception("Message couldn't be parsed");
-                    onConsume(parsedMessage.Content);
+                    onConsume(parsedMessage);
 
                     return Task.CompletedTask;
                 };

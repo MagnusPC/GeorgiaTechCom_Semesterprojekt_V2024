@@ -9,13 +9,15 @@ namespace Webshop.Tools.Messaging
 
         }
 
-        public Message(string type, T content)
+        public Message(string type, T content, string correlationId = null)
         {
             MessageType = type;
             Content = content;
+            CorrelationId = correlationId;
         }
 
         public string MessageType { get; set; }
         public T Content { get; set; }
+        public string? CorrelationId { get; set; }
 }
 }
