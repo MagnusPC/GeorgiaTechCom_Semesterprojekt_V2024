@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Webshop.Tools.Messaging;
 
 namespace Webshop.SearchService.Api.Controllers
@@ -43,36 +44,34 @@ namespace Webshop.SearchService.Api.Controllers
 
             consumer = new Consumer<List<Book>>(result =>
             {
-                State? s = callbacks.Find(x => x.CorrelationId == result.CorrelationId) ?? throw new Exception("Unknown message // missing id");
-
-                s.finished = true;
-                s.Content = result.Content;
+                State? s = callbacks.Find(x => x.CorrelationId == result.CorrelationId);
+                if (s != null)
+                {
+                    s.finished = true;
+                    s.Content = result.Content;
+                }
 
             }, "SearchComplete");
-            consumer.Connect().Wait();
 
+            consumer.Connect().Wait();
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetSearch([FromBody] SearchTerm term)
+        public async Task<IActionResult> GetSearch([FromBody] SearchTerm temp)
         {
-            await producer.SendMessage<SearchTerm>(new Message<SearchTerm>("Search", term));
-
             string correlationId = Guid.NewGuid().ToString();
-            State s = new State(correlationId, null, false);
+            await producer.SendMessage(new Message<SearchTerm>("Search", temp, correlationId));
+
+            State s = new(correlationId, null, false);
             callbacks.Add(s);
 
-            Task t = new Task<List<Book>?>(() =>
+            while (s.finished != true)
             {
-                while (s.finished != true)
-                {
-                    Thread.Sleep(10);
-                }
-                
-                callbacks.Remove(s);
-                Console.WriteLine(s.Content);
-                return s.Content;
-            });
+                Thread.Sleep(10);
+            }
+
+
+            callbacks.Remove(s);
 
             if (s.Content != null)
             {
@@ -86,9 +85,6 @@ namespace Webshop.SearchService.Api.Controllers
 
     public class SearchTerm
     {
-        string term;
-        string category;
-
         public SearchTerm()
         {
         }
@@ -99,8 +95,8 @@ namespace Webshop.SearchService.Api.Controllers
             Category = category;
         }
 
-        public string Term { get => term; set => term = value; }
-        public string Category { get => category; set => category = value; }
+        public string Term { get; set; }
+        public string Category { get; set ; }
     }
 
 

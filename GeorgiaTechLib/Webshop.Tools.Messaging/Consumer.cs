@@ -34,9 +34,6 @@ namespace Webshop.Tools.Messaging
                 };
 
                 await channel.BasicConsumeAsync(queue, autoAck: true, consumer: consumer);
-
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
             }
         }
     }
