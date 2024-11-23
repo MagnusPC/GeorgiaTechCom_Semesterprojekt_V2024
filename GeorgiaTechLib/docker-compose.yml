@@ -71,16 +71,18 @@ services:
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   searchapi:
-   # the review API
-    container_name: webshop.search
-    image: magnuspc/searchservice #TODO post
-    restart: unless-stopped
-    ports:
-      - 8090:8080
-    networks:
-      - backtier
-    environment:
-      - connectionstring=bobbytable # TODO connect to postgres
+  # The search API
+   container_name: webshop.search
+   build: 
+    context: ./Webshop.SearchService.Api
+    dockerfile: Dockerfile
+   restart: unless-stopped
+   ports:
+    - 8087:8080
+   networks: 
+    - backtier
+   environment: 
+    - SERVER=webshopdatabase
   sqlexpress:
   #the sql server
     container_name: webshopdatabase

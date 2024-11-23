@@ -4,8 +4,11 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
+# http port
 EXPOSE 80
+# https port
 EXPOSE 443
+
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -13,6 +16,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Webshop.SearchService.Api/Webshop.SearchService.Api.csproj", "Webshop.SearchService.Api/"]
 COPY ["Webshop.Tools.Messaging/Webshop.Tools.Messaging.csproj", "Webshop.Tools.Messaging/"]
+RUN ls /src/Webshop.Tools.Messaging/ # debugging
 RUN dotnet restore "./Webshop.SearchService.Api/Webshop.SearchService.Api.csproj"
 COPY . .
 WORKDIR "/src/Webshop.SearchService.Api"
