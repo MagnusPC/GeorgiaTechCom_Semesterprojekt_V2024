@@ -12,6 +12,7 @@ EXPOSE 443
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+RUN ls -la /src
 COPY ["Webshop.SearchService.Api/Webshop.SearchService.Api.csproj", "Webshop.SearchService.Api/"]
 COPY ["Webshop.Tools.Messaging/Webshop.Tools.Messaging.csproj", "Webshop.Tools.Messaging/"]
 RUN dotnet restore "./Webshop.SearchService.Api/Webshop.SearchService.Api.csproj"
