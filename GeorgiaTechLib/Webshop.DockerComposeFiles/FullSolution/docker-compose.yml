@@ -59,8 +59,8 @@ services:
         - 8085:8080
     networks:
         - backtier
-  reviewapi-1:
-   # the review API
+  reviewapi:
+   # the review API, delete comments "from reviewapi-1" to add loadbalance
     container_name: webshop.review
     image: brhv/webshopreviewservice
     restart: unless-stopped
@@ -70,17 +70,17 @@ services:
       - backtier
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
-  reviewapi-2:
-   # the review API - 2 for load balancing
-    container_name: webshop.review
-    image: brhv/webshopreviewservice
-    restart: unless-stopped
-    ports:
-      - 8087:8080
-    networks:
-      - backtier
-    environment:
-      - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
+# - reviewapi-1:
+#    # the 1 op 2 loadbalanced review API
+#     container_name: webshop.review.1
+#     image: brhv/webshopreviewservice
+#     restart: unless-stopped
+#     ports:
+#       - 8087:8080
+#     networks:
+#       - backtier
+#     environment:
+#       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   reviewgateway:
    # the review APIgateway
     container_name: webshop.reviewgateway
@@ -88,6 +88,17 @@ services:
     restart: unless-stopped
     ports:
       - 8089:8080
+    networks:
+      - backtier
+  searchapi:
+  #the search api
+    container_name: webshop.search
+    build:
+      context: ../..
+      dockerfile: ./Webshop.SearchService.Api/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8090:8080
     networks:
       - backtier
   sqlexpress:
@@ -107,18 +118,19 @@ services:
         - backtier
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - "8088:9090"
+    container_name: prometheus.monitor
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     depends_on:
       - reviewapi
+      # - reviewapi-1 
       - customerapi
       - catalogapi
       - paymentapi
+    ports:
+      - 8088:9090
     networks:
       - backtier
 networks:
