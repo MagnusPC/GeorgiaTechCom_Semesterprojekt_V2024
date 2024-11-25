@@ -42,9 +42,11 @@ services:
     networks:
       - backtier  
   catalogapi:
-  # the catalog API
+  # the catalog API - now local
     container_name: webshop.catalog
-    image: brhv/webshopcatalogapi
+    build:
+      context: ../..
+      dockerfile: ./Webshop.Catalog.Api/Dockerfile
     restart: unless-stopped
     ports:
         - 8084:8080
