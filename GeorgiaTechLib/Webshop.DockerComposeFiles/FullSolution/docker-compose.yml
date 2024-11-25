@@ -60,7 +60,7 @@ services:
     networks:
         - backtier
   reviewapi:
-   # the review API, add another for loadbalancing by copying and naming it "reviewapi-2"
+   # the review API, delete comments "from reviewapi-1" to add loadbalance
     container_name: webshop.review
     image: brhv/webshopreviewservice
     restart: unless-stopped
@@ -70,6 +70,17 @@ services:
       - backtier
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
+# - reviewapi-1:
+#    # the 1 op 2 loadbalanced review API
+#     container_name: webshop.review.1
+#     image: brhv/webshopreviewservice
+#     restart: unless-stopped
+#     ports:
+#       - 8087:8080
+#     networks:
+#       - backtier
+#     environment:
+#       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   reviewgateway:
    # the review APIgateway
     container_name: webshop.reviewgateway
@@ -114,6 +125,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
     depends_on:
       - reviewapi
+      # - reviewapi-1 
       - customerapi
       - catalogapi
       - paymentapi
