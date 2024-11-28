@@ -1,0 +1,40 @@
+﻿@if (book != null)
+{   
+<div class="book-frame">
+    <div class="book-title">
+        <div>
+            @book.Name
+        </div>
+        <div>
+            @book.Category
+        </div>
+    </div>
+    <div style="font-size: 2rem; justify-content: center;">
+        @book.Price $
+    </div>
+</div>
+}
+
+@code {
+    [Parameter]
+    public Book? book { get; set; }
+}
+
+<style>
+    .book-frame {
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+        padding: 10px;
+        border: 1px solid grey;
+        border-radius: 8px;
+    }
+
+    .book-title {
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        justify-content: left;
+    }
+</style>

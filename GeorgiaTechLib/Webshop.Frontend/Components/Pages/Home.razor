@@ -5,33 +5,18 @@
 
 <div style="padding: 20px;">
     <div style="display: flex; flex-direction: column">
-        <div style="display: flex; column-gap: 4px; row-gap: 4px">
-            <input @bind-value="bookSearch" type="text" />
-            <div @onclick="SearchBook" class="btn" style="padding: 4px; background-color: grey; border-radius: 4px">Search</div>
-        </div>
+        <HomeBookSearch onSearch="@UpdateCollection" />
         <div style="display: flex;">
             @foreach (string cat in categories)
             {
-                <div @onclick="async () => await SearchCategories(cat)" class="btn category">@cat</div>
+                <HomeCategory Category="@cat" onSearch="@UpdateCollection"/> 
             }
         </div>
     </div>
     <div style="display: flex; row-gap: 8px; column-gap: 8px">
         @foreach (Book book in currentSearch)
         {
-            <div class="book-frame">
-                <div class="book-title">
-                    <div>
-                        @book.Name
-                    </div>
-                    <div>
-                        @book.Category
-                    </div>
-                </div>
-                <div style="font-size: 2rem; justify-content: center;">
-                    @book.Price $
-                </div>
-            </div>
+            <HomeBook book="@book"/>
         }
     </div>
 </div>
@@ -45,13 +30,7 @@
     protected override async Task OnParametersSetAsync()
     {
         await GetAllBooks();
-
         await base.OnParametersSetAsync();
-    }
-
-    private async Task SearchBook()
-    {
-        currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = bookSearch });
     }
 
     private async Task GetAllBooks()
@@ -59,53 +38,9 @@
         currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = "" });
     }
 
-    private async Task SearchCategories(string category)
+    private void UpdateCollection(Book[] books)
     {
-        if (category == "All")
-        {
-            await GetAllBooks();
-        }
-        else
-        {
-            currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Category", Term = category });
-        }
+        currentSearch = books;
+        StateHasChanged();
     }
 }
-
-<style>
-    .btn {
-        cursor: pointer;
-        user-select: none;
-    }
-
-    .category {
-        padding: 5px;
-        border: 1px solid grey;
-        background-color: white;
-        color: grey;
-        transition: ease-in-out 0.1s;
-        border-radius: 4px;
-    }
-
-        .category:hover {
-            background-color: blueviolet;
-            color: white;
-        }
-
-    .book-frame {
-        display: flex;
-        flex-direction: row;
-        column-gap: 10px;
-        padding: 10px;
-        border: 1px solid grey;
-        border-radius: 8px;
-    }
-
-    .book-title {
-        font-size: 1rem;
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-        justify-content: left;
-    }
-</style>

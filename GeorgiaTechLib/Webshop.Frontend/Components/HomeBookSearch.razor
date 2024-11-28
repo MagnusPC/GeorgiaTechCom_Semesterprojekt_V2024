@@ -1,0 +1,35 @@
+﻿@rendermode InteractiveServer
+@inject ISearchServiceClient<SearchTerm, Book[]> searchClient
+
+<div style="display: flex; column-gap: 4px; row-gap: 4px">
+    <input @bind-value="bookSearch" type="text" />
+    <div @onclick="SearchBook" class="btn" style="padding: 4px; background-color: grey; border-radius: 4px">Search</div>
+</div>
+
+@code {
+    string bookSearch = "";
+
+    [Parameter]
+    public Action<Book[]>? onSearch { get; set; }
+
+    private async Task SearchBook()
+    {
+        if (onSearch != null)
+        {
+            Book[]? currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = bookSearch });
+
+            if (currentSearch != null)
+            {
+                onSearch(currentSearch);
+            }
+        }
+    }
+
+}
+
+<style>
+    .btn {
+        cursor: pointer;
+        user-select: none;
+    }
+</style>

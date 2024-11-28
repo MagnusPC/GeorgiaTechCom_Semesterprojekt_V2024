@@ -1,0 +1,56 @@
+﻿@rendermode InteractiveServer
+@inject ISearchServiceClient<SearchTerm, Book[]> searchClient
+
+@if (Category != null)
+{
+    <div @onclick="async () => await SearchCategories(Category)" class="btn category">@Category</div>
+}
+
+@code {
+    [Parameter]
+    public string? Category { get; set; }
+
+    [Parameter]
+    public Action<Book[]>? onSearch { get; set; }
+
+
+    private async Task GetAllBooks()
+    {
+        Book[] currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = "" });
+        onSearch?.Invoke(currentSearch);
+    }
+
+    private async Task SearchCategories(string category)
+    {
+        if (category == "All")
+        {
+            await GetAllBooks();
+        }
+        else
+        {
+            Book[] currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Category", Term = category });
+            onSearch?.Invoke(currentSearch);
+        }
+    }
+}
+
+<style>
+    .btn {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .category {
+        padding: 5px;
+        border: 1px solid grey;
+        background-color: white;
+        color: grey;
+        transition: ease-in-out 0.1s;
+        border-radius: 4px;
+    }
+
+        .category:hover {
+            background-color: blueviolet;
+            color: white;
+        }
+</style>
