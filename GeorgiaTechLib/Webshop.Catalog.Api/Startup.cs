@@ -52,7 +52,7 @@ namespace Webshop.Catalog.Api
             //add own services
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<DataContext, DataContext>();
+            services.AddScoped<MSDataContext, MSDataContext>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IDispatcher>(sp => new Dispatcher(sp.GetService<IMediator>()));

@@ -18,7 +18,7 @@ namespace Webshop.Customer.Persistence
         private readonly string foldername;
         private readonly string filename;
         private List<Domain.AggregateRoots.Customer> customers;
-        public CustomerRepositoryJSON(DataContext dataContext) : base("customers.json", dataContext)
+        public CustomerRepositoryJSON(MSDataContext dataContext) : base("customers.json", dataContext)
         {
             foldername = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "database");
             filename = Path.Combine(foldername, this.TableName);

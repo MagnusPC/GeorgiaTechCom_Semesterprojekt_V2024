@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Webshop.Data.Persistence
 {
-    public class DataContext
+    public class MSDataContext
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        private readonly ILogger<DataContext> _logger;
-        public DataContext(IConfiguration configuration, ILogger<DataContext> logger)
+        private readonly ILogger<MSDataContext> _logger;
+        public MSDataContext(IConfiguration configuration, ILogger<MSDataContext> logger)
         {
             _configuration = configuration;
             _logger = logger;

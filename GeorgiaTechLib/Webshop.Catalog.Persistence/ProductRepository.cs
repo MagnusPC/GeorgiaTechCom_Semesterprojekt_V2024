@@ -13,7 +13,7 @@ namespace Webshop.Catalog.Persistence
 {
     public class ProductRepository : BaseRepository, IProductRepository
     {
-        public ProductRepository(DataContext context) : base(TableNames.Catalog.PRODUCTTABLE, context) { }
+        public ProductRepository(MSDataContext context) : base(TableNames.Catalog.PRODUCTTABLE, context) { }
 
         public async Task<Result> AddProductToCategory(int productId, int categoryId)
         {

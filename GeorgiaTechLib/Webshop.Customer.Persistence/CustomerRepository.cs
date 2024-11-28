@@ -11,7 +11,7 @@ namespace Webshop.Customer.Persistence
 {
     public class CustomerRepository : BaseRepository, ICustomerRepository
     {
-        public CustomerRepository(DataContext context) : base(TableNames.Customer.CUSTOMERTABLE, context) { }
+        public CustomerRepository(MSDataContext context) : base(TableNames.Customer.CUSTOMERTABLE, context) { }
         public async Task CreateAsync(Domain.AggregateRoots.Customer entity)
         {
             using(var connection = dataContext.CreateConnection())

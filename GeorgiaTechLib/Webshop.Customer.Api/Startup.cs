@@ -51,7 +51,7 @@ namespace Webshop.Customer.Api
             });
             //add own services
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<DataContext, DataContext>();
+            services.AddScoped<MSDataContext, MSDataContext>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 

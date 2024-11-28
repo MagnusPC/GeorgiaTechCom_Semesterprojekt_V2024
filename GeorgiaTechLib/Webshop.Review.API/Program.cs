@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //custom services
-builder.Services.AddScoped<DataContext, DataContext>();
+builder.Services.AddScoped<MSDataContext, MSDataContext>();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IDispatcher>(sp => new Dispatcher(sp.GetService<IMediator>()));
 //add the instance singleton
