@@ -1,6 +1,6 @@
 ﻿namespace Webshop.Search.Persisstence
 {
-    public class Class1
+    public class SearchRepository
     {
 
     }
