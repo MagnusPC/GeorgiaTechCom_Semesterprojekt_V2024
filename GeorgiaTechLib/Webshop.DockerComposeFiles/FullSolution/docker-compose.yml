@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   help:
-    # SeQ is a framework for logging of exceptions etc
+  # SeQ is a framework for logging of exceptions etc
     container_name: webshophelp
     image: brhv/webshophelp
     restart: unless-stopped
@@ -12,7 +12,7 @@ services:
     environment:
       - SERVER=webshopdatabase
   seq:
-    # SeQ is a framework for logging of exceptions etc
+  # SeQ is a framework for logging of exceptions etc
     container_name: SeQ
     image: datalust/seq:latest
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
   smtp4dev:
-    # development time email server and client, easy to test sending emails
+  # development time email server and client, easy to test sending emails
     container_name: smtp4dev
     image: rnwood/smtp4dev:latest
     ports:
@@ -33,7 +33,7 @@ services:
     networks:
       - backtier
   paymentapi:
-   # the payment API
+  # the payment API
     container_name: webshop.payment
     image: brhv/webshoppaymentapi
     restart: unless-stopped
@@ -62,7 +62,7 @@ services:
     networks:
         - backtier
   reviewapi:
-   # the review API, delete comments "from reviewapi-1" to add loadbalance
+  # the review API, delete comments "from reviewapi-1" to add loadbalance
     container_name: webshop.review
     image: brhv/webshopreviewservice
     restart: unless-stopped
@@ -72,17 +72,17 @@ services:
       - backtier
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
-# - reviewapi-1:
-#    # the 1 op 2 loadbalanced review API
-#     container_name: webshop.review.1
-#     image: brhv/webshopreviewservice
-#     restart: unless-stopped
-#     ports:
-#       - 8087:8080
-#     networks:
-#       - backtier
-#     environment:
-#       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
+  # reviewapi-1:
+  ## the 1 op 2 loadbalanced review API
+  #   container_name: webshop.review.1
+  #   image: brhv/webshopreviewservice
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8087:8080
+  #   networks:
+  #     - backtier
+  #   environment:
+  #     - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   reviewgateway:
    # the review APIgateway
     container_name: webshop.reviewgateway
@@ -136,6 +136,11 @@ services:
       - ./pg_data:/var/lib/postgresql/data
     networks:
       - backtier
+  # rabbitmq:
+  # # link https://hub.docker.com/r/bitnami/rabbitmq
+  #   image: 'bitnami/rabbitmq:latest'
+  #   networks:
+  #     - backtier
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus.monitor
@@ -153,11 +158,6 @@ services:
       - 8088:9090
     networks:
       - backtier
-  # rabbitmq:
-  # # link https://hub.docker.com/r/bitnami/rabbitmq
-  #   image: 'bitnami/rabbitmq:latest'
-  #   networks:
-  #     - backtier
 networks:
   # The presence of these objects is sufficient to define them
   backtier: {}
