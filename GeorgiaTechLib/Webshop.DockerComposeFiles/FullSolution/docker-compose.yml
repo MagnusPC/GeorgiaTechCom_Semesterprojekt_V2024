@@ -119,7 +119,7 @@ services:
         - SA_PASSWORD=PSU@password
         - MSSQL_PID=Express
     volumes:
-        - ./ms_data:/var/opt/mssql/data
+        - ./mssql_georgia_data:/var/opt/mssql/data
     networks:
         - backtier
   postgres:
@@ -135,7 +135,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=PSU@password
     volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - ./postgres_georgia_data:/var/lib/postgresql/data
     networks:
       - backtier
   # rabbitmq:
