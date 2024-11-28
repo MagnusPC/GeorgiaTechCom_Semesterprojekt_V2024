@@ -133,7 +133,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=PSU@password
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./pg_data:/var/lib/postgresql/data
     networks:
       - backtier
   prometheus:
