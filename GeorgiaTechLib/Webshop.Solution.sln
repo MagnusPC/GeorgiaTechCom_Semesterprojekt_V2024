@@ -83,7 +83,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Frontend", "Webshop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Tools.APIAccess", "Webshop.Tools.APIAccess\Webshop.Tools.APIAccess.csproj", "{7A2F2BC9-2BD2-4F9E-8D5C-7C2B0DA4D803}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Search.Persisstence", "Webshop.Search.Persisstence\Webshop.Search.Persisstence.csproj", "{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Search.Persistence", "Webshop.Search.Persisstence\Webshop.Search.Persistence.csproj", "{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
