@@ -4,7 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Custom files/paths
-../../pg_data
+../../pg_data/
+../../ms_data/
 
 # User-specific files
 *.rsuser
