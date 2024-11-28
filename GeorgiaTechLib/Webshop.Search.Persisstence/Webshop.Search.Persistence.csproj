@@ -7,8 +7,13 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.0.123" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Webshop.Application\Webshop.Application.csproj" />
 		<ProjectReference Include="..\Webshop.Catalog.Domain\Webshop.Catalog.Domain.csproj" />
+		<ProjectReference Include="..\Webshop.Data.Persistence\Webshop.Data.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>
