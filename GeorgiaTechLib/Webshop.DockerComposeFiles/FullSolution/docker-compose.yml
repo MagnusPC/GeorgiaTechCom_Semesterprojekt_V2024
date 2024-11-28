@@ -117,7 +117,7 @@ services:
         - SA_PASSWORD=PSU@password
         - MSSQL_PID=Express
     volumes:
-        - ./data:/var/opt/mssql/data
+        - ./ms_data:/var/opt/mssql/data
     networks:
         - backtier
   postgres:
