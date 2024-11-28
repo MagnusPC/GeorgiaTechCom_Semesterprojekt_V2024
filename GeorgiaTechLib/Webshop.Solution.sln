@@ -29,7 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Seed", "Database S
 		Customers.sql = Customers.sql
 		Product.sql = Product.sql
 		ProductCategory.sql = ProductCategory.sql
-		ProductSearch.sql = ProductSearch.sql
 		Seed Demo Customers.sql = Seed Demo Customers.sql
 	EndProjectSection
 EndProject
@@ -71,9 +70,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Review.Application.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Review.API.Tests", "Webshop.Review.API.Tests\Webshop.Review.API.Tests.csproj", "{8AF718F2-1E03-43FB-8ED7-A7FDB4E6A699}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.DockerComposeFiles", "Webshop.DockerComposeFiles\Webshop.DockerComposeFiles.csproj", "{E4249626-7798-4F04-9434-55627D172A1C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Search.Persistence", "Webshop.Search.Persistence\Webshop.Search.Persistence.csproj", "{FE518FA8-C8DE-42DD-A63E-E255E44B128E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.DockerComposeFiles", "Webshop.DockerComposeFiles\Webshop.DockerComposeFiles.csproj", "{E4249626-7798-4F04-9434-55627D172A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,10 +170,6 @@ Global
 		{E4249626-7798-4F04-9434-55627D172A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4249626-7798-4F04-9434-55627D172A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4249626-7798-4F04-9434-55627D172A1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE518FA8-C8DE-42DD-A63E-E255E44B128E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE518FA8-C8DE-42DD-A63E-E255E44B128E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE518FA8-C8DE-42DD-A63E-E255E44B128E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE518FA8-C8DE-42DD-A63E-E255E44B128E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,7 +202,6 @@ Global
 		{253BCBC9-88DD-426E-846E-2F98C1927075} = {BF604B02-EA9B-4EE8-A7F0-EDD07B387082}
 		{8AF718F2-1E03-43FB-8ED7-A7FDB4E6A699} = {BF604B02-EA9B-4EE8-A7F0-EDD07B387082}
 		{E4249626-7798-4F04-9434-55627D172A1C} = {75AFF816-1819-450B-8D19-E4CBD80530B0}
-		{FE518FA8-C8DE-42DD-A63E-E255E44B128E} = {1E6BED77-EB85-4EC8-BE0F-7E8A57F3D4AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {822AAF83-FC8D-42BE-9726-63314F24EB10}
