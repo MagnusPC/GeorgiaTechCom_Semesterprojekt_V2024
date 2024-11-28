@@ -13,7 +13,7 @@ namespace Webshop.Customer.Persistence
     /// <summary>
     /// The purpose of this class is to save the customer to a JSON file that can be comitted to github
     /// </summary>
-    public class CustomerRepositoryJSON : BaseRepository, ICustomerRepository
+    public class CustomerRepositoryJSON : BaseRepository<MSDataContext>, ICustomerRepository
     {
         private readonly string foldername;
         private readonly string filename;

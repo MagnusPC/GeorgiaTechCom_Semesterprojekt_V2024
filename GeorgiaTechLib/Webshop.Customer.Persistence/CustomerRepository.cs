@@ -9,7 +9,7 @@ using Webshop.Data.Persistence;
 
 namespace Webshop.Customer.Persistence
 {
-    public class CustomerRepository : BaseRepository, ICustomerRepository
+    public class CustomerRepository : BaseRepository<MSDataContext>, ICustomerRepository
     {
         public CustomerRepository(MSDataContext context) : base(TableNames.Customer.CUSTOMERTABLE, context) { }
         public async Task CreateAsync(Domain.AggregateRoots.Customer entity)

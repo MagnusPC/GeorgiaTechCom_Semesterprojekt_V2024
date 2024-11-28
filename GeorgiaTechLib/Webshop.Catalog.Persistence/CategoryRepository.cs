@@ -10,7 +10,7 @@ using Webshop.Data.Persistence;
 
 namespace Webshop.Catalog.Persistence
 {
-    public class CategoryRepository : BaseRepository, ICategoryRepository
+    public class CategoryRepository : BaseRepository<MSDataContext>, ICategoryRepository
     {
         public CategoryRepository(MSDataContext context) : base(TableNames.Catalog.CATEGORYTABLE, context) { }
         public async Task CreateAsync(Catalog.Domain.AggregateRoots.Category entity)

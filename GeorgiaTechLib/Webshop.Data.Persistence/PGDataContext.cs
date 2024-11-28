@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Webshop.Data.Persistence
 {
-    public class MSDataContext : IDataContext
+    public class PGDataContext : IDataContext
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        private readonly ILogger<MSDataContext> _logger;
-        public MSDataContext(IConfiguration configuration, ILogger<MSDataContext> logger)
+        private readonly ILogger<PGDataContext> _logger;
+        public PGDataContext(IConfiguration configuration, ILogger<PGDataContext> logger)
         {
             _configuration = configuration;
             _logger = logger;
@@ -28,11 +29,11 @@ namespace Webshop.Data.Persistence
             }
             else
             {
-                _connectionString = _configuration.GetConnectionString("MSConnection");
+                _connectionString = _configuration.GetConnectionString("PGConnection");
                 this._logger.LogWarning($"Using connectionstring: \"{_connectionString}\" - from settings file");
             }            
         }
         public IDbConnection CreateConnection()
-            => new System.Data.SqlClient.SqlConnection(_connectionString);
+            => new NpgsqlConnection(_connectionString);
     }
 }

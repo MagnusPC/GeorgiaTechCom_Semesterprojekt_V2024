@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Webshop.Data.Persistence
 {
-    public class BaseRepository
+    public class BaseRepository<IDataContext>
     {
-        public BaseRepository(string tableName, MSDataContext dataContext)
+        public BaseRepository(string tableName, IDataContext dataContext)
         {
             this.dataContext = dataContext;
             this.TableName = tableName;
         }
 
         protected string TableName { get; private set; }
-        protected MSDataContext dataContext { get; private set; }
+        protected IDataContext dataContext { get; private set; }
     }
 }
