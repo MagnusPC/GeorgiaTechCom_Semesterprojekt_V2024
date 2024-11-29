@@ -8,6 +8,7 @@ using Webshop.Catalog.Application.Contracts.Persistence;
 using Webshop.Catalog.Domain.AggregateRoots;
 using Webshop.Data.Persistence;
 using Webshop.Domain.Common;
+using Webshop.Search.Persistence;
 
 namespace Webshop.Catalog.Persistence
 {
@@ -24,9 +25,10 @@ namespace Webshop.Catalog.Persistence
                 return Result.Ok();
             }
         }
-
+        
         public async Task CreateAsync(Product entity)
         {
+            ISearchRepository.CreateAsyncConversion(entity);
             using(var connection  = dataContext.CreateConnection())
             {
                 string command = $"insert into {TableName} (Name, SKU, Price, Currency, Description, AmountInStock, MinStock) values (@name, @sku, @price, @currency, @description, @stock, @minstock)";
