@@ -64,7 +64,7 @@ services:
     networks:
         - backtier
   reviewapi:
-  # the review API, delete comments "from reviewapi-1" to add loadbalance
+  # the review API, delete comments "from reviewapi-1" to add loadbalanc
     container_name: webshop.review
     image: brhv/webshopreviewservice
     restart: unless-stopped
@@ -138,11 +138,6 @@ services:
       - ./postgres_georgia_data:/var/lib/postgresql/data
     networks:
       - backtier
-  # rabbitmq:
-  # # link https://hub.docker.com/r/bitnami/rabbitmq
-  #   image: 'bitnami/rabbitmq:latest'
-  #   networks:
-  #     - backtier
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus.monitor
