@@ -44,9 +44,10 @@ services:
   catalogapi:
   # the catalog API - now local
     container_name: webshop.catalog
-    build:
-      context: ../..
-      dockerfile: ./Webshop.Catalog.Api/Dockerfile
+    image: brhv/webshopcatalogapi
+    # build:
+    #   context: ../..
+    #   dockerfile: ./Webshop.Catalog.Api/Dockerfile
     restart: unless-stopped
     ports:
         - 8084:8080
