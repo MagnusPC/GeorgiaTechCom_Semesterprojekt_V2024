@@ -1,25 +1,30 @@
-﻿using Webshop.Tools.APIAccess;
+﻿using Webshop.Search.Domain;
+using Webshop.Tools.APIAccess;
 
 namespace Webshop.Frontend.Mocking
 {
-    public class MockSearchTermClient : ISearchServiceClient<SearchTerm, Book[]>
+    public class MockSearchTermClient : ISearchServiceClient<SearchTerm, SearchResult[]>
     {
-        List<Book> books = [
-            new Book() { Category = "Sci-Fi", Name = "Ready Player One", Price = 99.99f },
-            new Book() { Category = "Sci-Fi", Name = "Star Wars", Price = 199.99f },
-            new Book() { Category = "Fantasy", Name = "Lord of the Rings", Price = 999.99f },
-            new Book() { Category = "Fantasy", Name = "Six of Crows", Price = 119.99f }
-            ];
 
-        public async Task<Book[]> Post(string endpoint, SearchTerm Payload)
+        private List<SearchResult> searchResults = new List<SearchResult>
         {
-            if (Payload.SearchType == "Book")
+            new SearchResult(1, "Ready Player One", "Ernest Cline", 1, "Sci-Fi", 2011),
+            new SearchResult(2, "Star Wars", "George Lucas", 1, "Sci-Fi", 1977),
+            new SearchResult(3, "Lord of the Rings", "J.R.R. Tolkien", 2, "Fantasy", 1954),
+            new SearchResult(4, "Six of Crows", "Leigh Bardugo", 2, "Fantasy", 2015),
+            new SearchResult(5, "Gravity's Rainbow", "Thomas Pynchon", 3, "Sci-Fi", 1973),
+            new SearchResult(6, "The Crying of Lot 49", "Thomas Pynchon", 3, "Sci-Fi", 1966)
+        };
+
+        public async Task<SearchResult[]> Post(string endpoint, SearchTerm Payload)
+        {
+            if (Payload.SearchType == "SearchResult")
             {
-                return [.. books.FindAll(x => x.Name.ToLower().Contains(Payload.Term.ToLower()))];
+                return [.. searchResults.FindAll(x => x.Title.ToLower().Contains(Payload.Term.ToLower()))];
             }
             else if (Payload.SearchType == "Category")
             {
-                return [.. books.FindAll(x => x.Category == Payload.Term)];
+                return [.. searchResults.FindAll(x => x.Category == Payload.Term)];
             }
 
             return [];

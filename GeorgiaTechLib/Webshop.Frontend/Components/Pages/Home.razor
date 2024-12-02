@@ -1,7 +1,8 @@
 ﻿@rendermode InteractiveServer
-@inject ISearchServiceClient<SearchTerm, Book[]> searchClient
+@inject ISearchServiceClient<SearchTerm, SearchResult[]> searchClient
 
 @page "/"
+@using Webshop.Search.Domain
 
 <div style="padding: 20px;">
     <div style="display: flex; flex-direction: column">
@@ -17,19 +18,19 @@
         </div>
     </div>
     <div style="display: flex; row-gap: 8px; column-gap: 8px">
-        @foreach (Book book in currentSearch)
+        @foreach (SearchResult book in currentSearch)
         {
             <div class="book-frame">
                 <div class="book-title">
                     <div>
-                        @book.Name
+                        @book.Title
                     </div>
                     <div>
                         @book.Category
                     </div>
                 </div>
                 <div style="font-size: 2rem; justify-content: center;">
-                    @book.Price $
+                    @book.Author $
                 </div>
             </div>
         }
@@ -38,7 +39,7 @@
 
 @code {
     string[] categories = ["All", "Fantasy", "Sci-Fi"];
-    Book[] currentSearch = [];
+    SearchResult[] currentSearch = [];
 
     string bookSearch = "";
 
@@ -51,12 +52,12 @@
 
     private async Task SearchBook()
     {
-        currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = bookSearch });
+        currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "SearchResult", Term = bookSearch });
     }
 
     private async Task GetAllBooks()
     {
-        currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "Book", Term = "" });
+        currentSearch = await searchClient.Post("Search", new SearchTerm() { SearchType = "SearchResult", Term = "" });
     }
 
     private async Task SearchCategories(string category)

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Webshop.Search.Domain\Webshop.Search.Domain.csproj" />
     <ProjectReference Include="..\Webshop.Tools.Messaging\Webshop.Tools.Messaging.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using Webshop.Search.Domain;
 using Webshop.Tools.Messaging;
 
 namespace Webshop.SearchService.Api.Controllers
@@ -9,18 +10,18 @@ namespace Webshop.SearchService.Api.Controllers
     public class SearchTermController : ControllerBase
     {
         Producer producer;
-        Consumer<List<Book>> consumer;
+        Consumer<List<SearchResult>> consumer;
 
         List<State> callbacks;
 
         public class State
         {
             public string CorrelationId { get; set; }
-            public List<Book>? Content { get; set; }
+            public List<SearchResult>? Content { get; set; }
 
             public bool finished;
 
-            public State(string correlationId, List<Book>? content, bool finished)
+            public State(string correlationId, List<SearchResult>? content, bool finished)
             {
                 CorrelationId = correlationId;
                 Content = content;
@@ -28,12 +29,6 @@ namespace Webshop.SearchService.Api.Controllers
             }
         }
 
-        public class Book
-        {
-            public string ISBN { get; set; }
-            public string Title { get; set; }
-
-        }
 
         public SearchTermController()
         {
@@ -42,7 +37,7 @@ namespace Webshop.SearchService.Api.Controllers
 
             callbacks = new List<State>();
 
-            consumer = new Consumer<List<Book>>(result =>
+            consumer = new Consumer<List<SearchResult>>(result =>
             {
                 State? s = callbacks.Find(x => x.CorrelationId == result.CorrelationId);
                 if (s != null)
@@ -77,28 +72,11 @@ namespace Webshop.SearchService.Api.Controllers
             {
                 return Ok(s.Content);
             }
-            
+
             return NoContent();
 
         }
     }
-
-    public class SearchTerm
-    {
-        public SearchTerm()
-        {
-        }
-
-        public SearchTerm(string term, string category)
-        {
-            Term = term;
-            Category = category;
-        }
-
-        public string Term { get; set; }
-        public string Category { get; set ; }
-    }
-
-
-
 }
+
+    

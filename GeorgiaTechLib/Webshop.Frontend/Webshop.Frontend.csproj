@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Webshop.Search.Domain\Webshop.Search.Domain.csproj" />
     <ProjectReference Include="..\Webshop.Tools.APIAccess\Webshop.Tools.APIAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="9.0.1" />
   </ItemGroup>
 
 </Project>
