@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Webshop.Search.Domain
 {
-    public class SearchTerm
+    public class DomainSearchTerm
     {
-        public SearchTerm()
+        public DomainSearchTerm()
         {
         }
 
-        public SearchTerm(string type,string term, string category)
+        public DomainSearchTerm(string type,string term, string category)
         {
             SearchType = type;
             Term = term;

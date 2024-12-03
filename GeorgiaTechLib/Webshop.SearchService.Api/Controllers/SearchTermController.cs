@@ -58,10 +58,10 @@ namespace Webshop.SearchService.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetSearch([FromBody] SearchTerm temp)
+        public async Task<IActionResult> GetSearch([FromBody] DomainSearchTerm temp)
         {
             string correlationId = Guid.NewGuid().ToString();
-            await producer.SendMessage(new Message<SearchTerm>("Search", temp, correlationId));
+            await producer.SendMessage(new Message<DomainSearchTerm>("Search", temp, correlationId));
 
             State s = new(correlationId, null, false);
             callbacks.Add(s);
