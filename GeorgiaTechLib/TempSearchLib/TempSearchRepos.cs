@@ -1,4 +1,4 @@
-﻿
+﻿using Dapper;
 using System.Net.Http.Headers;
 using Webshop.Catalog.Domain.AggregateRoots;
 using Webshop.Data.Persistence;
