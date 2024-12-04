@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.BookSearch.Service"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataWrappers", "DataWrappers\DataWrappers.csproj", "{96E1CF61-E221-451B-9A1D-FE9337068D7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.SearchDBAccess.API", "Webshop.SearchDBAccess.API\Webshop.SearchDBAccess.API.csproj", "{6AD6543C-7955-4251-BAAD-8DD96530A2CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{96E1CF61-E221-451B-9A1D-FE9337068D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96E1CF61-E221-451B-9A1D-FE9337068D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96E1CF61-E221-451B-9A1D-FE9337068D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD6543C-7955-4251-BAAD-8DD96530A2CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD6543C-7955-4251-BAAD-8DD96530A2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD6543C-7955-4251-BAAD-8DD96530A2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD6543C-7955-4251-BAAD-8DD96530A2CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -250,6 +256,7 @@ Global
 		{7A2F2BC9-2BD2-4F9E-8D5C-7C2B0DA4D803} = {07CFB857-FCBF-42EE-B38E-BD93BD53C647}
 		{454813EA-EC86-42CE-8C1E-B330311EE891} = {774CCD7D-ED3B-4D75-8A7F-CEFC745765DB}
 		{96E1CF61-E221-451B-9A1D-FE9337068D7D} = {07CFB857-FCBF-42EE-B38E-BD93BD53C647}
+		{6AD6543C-7955-4251-BAAD-8DD96530A2CA} = {98BEA6C6-7D0C-4A74-86D3-804C1C4A952A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {822AAF83-FC8D-42BE-9726-63314F24EB10}
