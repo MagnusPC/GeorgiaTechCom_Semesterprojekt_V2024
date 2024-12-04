@@ -16,6 +16,11 @@ namespace Webshop.Data.Persistence
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
         private readonly ILogger<TempPGDataContext> _logger;
+
+        public TempPGDataContext()
+        {
+        }
+
         public TempPGDataContext(IConfiguration configuration, ILogger<TempPGDataContext> logger)
         {
             _configuration = configuration;

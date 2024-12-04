@@ -41,7 +41,16 @@ namespace Webshop.Catalog.Persistence
                     stock = entity.AmountInStock,
                     minstock = entity.MinStock
                 });
-                ITempSearchRepos ts = new TempSearchRepos(dataContext); //TODO fix, bruger mssql context men skal bruge postgres
+                await CreateExternalAsync(entity);
+            }
+        }
+
+        internal async Task CreateExternalAsync(Product entity)
+        {
+            ITempDataContext datcon = new TempPGDataContext();
+            using (var connection = datcon.CreateConnection())
+            {
+                ITempSearchRepos ts = new TempSearchRepos(datcon); //TODO fix, bruger mssql context men skal bruge postgres
                 await ts.CreateAsync(entity);
             }
         }

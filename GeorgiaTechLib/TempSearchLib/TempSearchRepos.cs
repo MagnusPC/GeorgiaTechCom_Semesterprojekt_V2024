@@ -6,10 +6,11 @@ using Webshop.Data.Persistence;
 namespace Webshop.Tools.TempSearchLib
 {
 
-    public class TempSearchRepos : TempBaseRepository<TempPGDataContext>, ITempSearchRepos
+    public class TempSearchRepos : TempBaseRepository<ITempDataContext>, ITempSearchRepos
     {
 
-        public TempSearchRepos(TempPGDataContext context) : base(TableNames.Search.SEARCHTABLE, context) { }
+        public TempSearchRepos(ITempDataContext context) : base(TableNames.Search.SEARCHTABLE, context) {
+        }
 
         public async Task CreateAsync(Product entity)
         {
