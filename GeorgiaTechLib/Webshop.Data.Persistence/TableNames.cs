@@ -18,11 +18,16 @@ namespace Webshop.Data.Persistence
         public static class Customer
         {
             public static string CUSTOMERTABLE = "Customer";
-        }    
-        
+        }
+
         public static class Review
         {
             public static string REVIEWTABLE = "Reviews";
+        }
+
+        public static class Search
+        {
+            public static string SEARCHTABLE = "Search";
         }
     }
 }
