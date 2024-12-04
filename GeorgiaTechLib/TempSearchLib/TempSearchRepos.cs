@@ -17,7 +17,8 @@ namespace Webshop.Tools.TempSearchLib
 
             using (var connection = dataContext.CreateConnection())
             {
-                string command = $"insert into {TableName} (Name, SKU, Price, Currency, Description, AmountInStock, MinStock) values (@name, @sku, @price, @currency, @description, @stock, @minstock)";
+                string command = $"INSERT INTO {TableName} (BookId, Title, Author, Categoryid, Category, PublishedYear) VALUES (@sku, @name, @author, @catId, @cat, @publishedYear)";
+                //string command = $"insert into {TableName} (Name, SKU, Price, Currency, Description, AmountInStock, MinStock) values (@name, @sku, @price, @currency, @description, @stock, @minstock)";
                 await connection.ExecuteAsync(command, new
                 {
                     sku = prodConverted.BookId.ToString(),
