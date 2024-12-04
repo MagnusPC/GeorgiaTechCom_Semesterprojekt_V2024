@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Webshop.Tools.Messaging;
+using Webshop.Tools.Messaging.Consumers;
+using Webshop.Tools.Messaging.Producers;
 
 namespace Webshop.SearchService.Api.Controllers
 {

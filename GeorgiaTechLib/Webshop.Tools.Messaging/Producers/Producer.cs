@@ -1,10 +1,11 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Channels;
 
-namespace Webshop.Tools.Messaging
+namespace Webshop.Tools.Messaging.Producers
 {
-    public class Producer : Connection
+    public class Producer : Connection, IProducer
     {
         public Producer(string _queue, string _hostname = "localhost") : base(_queue, _hostname)
         {
@@ -14,7 +15,7 @@ namespace Webshop.Tools.Messaging
         {
             if (channel != null)
             {
-                string json = JsonSerializer.Serialize<Message<T>>(message);
+                string json = JsonSerializer.Serialize(message);
                 var body = Encoding.UTF8.GetBytes(json);
 
                 await channel.BasicPublishAsync(exchange: string.Empty, routingKey: queue, body: body);

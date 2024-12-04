@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Webshop.Tools.Messaging
 {
-    public class Connection
+    public abstract class Connection
     {
         protected IConnection? connection;
         protected IChannel? channel;
