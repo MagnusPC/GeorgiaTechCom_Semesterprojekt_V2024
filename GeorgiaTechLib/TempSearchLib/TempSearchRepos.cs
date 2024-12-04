@@ -6,21 +6,26 @@ using Webshop.Data.Persistence;
 namespace Webshop.Tools.TempSearchLib
 {
 
-    public class TempSearchRepos : BaseRepository, ITempSearchRepos
+    public class TempSearchRepos : TempBaseRepository<TempPGDataContext>, ITempSearchRepos
     {
 
-        public TempSearchRepos(DataContext context) : base(TableNames.Search.SEARCHTABLE, context) { }
+        public TempSearchRepos(TempPGDataContext context) : base(TableNames.Search.SEARCHTABLE, context) { }
 
         public async Task CreateAsync(Product entity)
         {
-            ConvertCreateObject(entity);
+            TempSearchObject prodConverted = ConvertCreateObject(entity);
 
             using (var connection = dataContext.CreateConnection())
             {
-                string command = $"insert into {TableName} (bookId, title, author, categoryId, category, publishedYear) values (@name, @sku, @price, @currency, @description, @stock, @minstock)";
+                string command = $"insert into {TableName} (Name, SKU, Price, Currency, Description, AmountInStock, MinStock) values (@name, @sku, @price, @currency, @description, @stock, @minstock)";
                 await connection.ExecuteAsync(command, new
                 {
-
+                    sku = prodConverted.BookId.ToString(),
+                    name = prodConverted.Title,
+                    author = prodConverted.Author,
+                    catId = prodConverted.CategoryId,  
+                    cat = prodConverted.Category,
+                    publishedYear = prodConverted.PublishedYear //TODO fix these
                 });
             }
         }
@@ -29,7 +34,7 @@ namespace Webshop.Tools.TempSearchLib
         {
             TempSearchObject tsObject = new()
             {
-                //tsObject.BookId = entity.SKU;
+                BookId = 0,
                 Title = entity.Name,
                 Author = "",
                 CategoryId = 0,
