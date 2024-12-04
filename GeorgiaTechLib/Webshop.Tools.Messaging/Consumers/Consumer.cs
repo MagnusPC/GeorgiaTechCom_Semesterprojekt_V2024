@@ -3,9 +3,9 @@ using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-namespace Webshop.Tools.Messaging
+namespace Webshop.Tools.Messaging.Consumers
 {
-    public class Consumer<T> : Connection
+    public class Consumer<T> : Connection, IConsumer<T>
     {
         readonly Action<Message<T>> onConsume;
         public Consumer(Action<Message<T>> _onConsume, string _queue, string _hostname = "localhost") : base(_queue, _hostname)
