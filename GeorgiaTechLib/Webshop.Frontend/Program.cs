@@ -13,7 +13,7 @@ namespace Webshop.Frontend
 
            builder.Services.AddTransient<ISearchServiceClient<SearchTerm, SearchResult[]>, MockSearchTermClient>();
 
-           builder.Services.AddSingleton<DatabaseService>();
+          
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
@@ -22,10 +22,7 @@ namespace Webshop.Frontend
             var app = builder.Build();
 
 
-            // Initialize the database
-            var databaseInitializer = app.Services.GetRequiredService<DatabaseService>();
-            Task.Run(() => databaseInitializer.InitializeDatabase()).GetAwaiter().GetResult();
-
+         
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

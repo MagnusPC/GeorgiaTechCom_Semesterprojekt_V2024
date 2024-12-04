@@ -8,12 +8,12 @@ namespace Webshop.Frontend.Mocking
 
         private List<SearchResult> searchResults = new List<SearchResult>
         {
-            new SearchResult(1, "Ready Player One", "Ernest Cline", 1, "Sci-Fi", 2011),
-            new SearchResult(2, "Star Wars", "George Lucas", 1, "Sci-Fi", 1977),
-            new SearchResult(3, "Lord of the Rings", "J.R.R. Tolkien", 2, "Fantasy", 1954),
-            new SearchResult(4, "Six of Crows", "Leigh Bardugo", 2, "Fantasy", 2015),
-            new SearchResult(5, "Gravity's Rainbow", "Thomas Pynchon", 3, "Sci-Fi", 1973),
-            new SearchResult(6, "The Crying of Lot 49", "Thomas Pynchon", 3, "Sci-Fi", 1966)
+            new SearchResult(1, "Ready Player One", 2, "Science Fiction", 2011, 14.99m),
+            new SearchResult(2, "Star Wars", 2, "Science Fiction", 1977, 19.99m),
+            new SearchResult(3, "Lord of the Rings", 4, "Fantasy", 1954, 24.99m),
+            new SearchResult(4, "Six of Crows", 4, "Fantasy", 2015, 12.99m),
+            new SearchResult(5, "Gravity's Rainbow", 3, "Postmodern Fiction", 1973, 16.49m),
+            new SearchResult(6, "The Crying of Lot 49", 3, "Postmodern Fiction", 1966, 9.99m)
         };
 
         public async Task<SearchResult[]> Post(string endpoint, SearchTerm Payload)

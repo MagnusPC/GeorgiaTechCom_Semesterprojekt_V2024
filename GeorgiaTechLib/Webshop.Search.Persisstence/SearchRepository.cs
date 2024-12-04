@@ -82,7 +82,7 @@ namespace Webshop.Search.Persisstence
                 string sql = $@"
             INSERT INTO {this.TableName} 
             (BookId, Title, Author, CategoryId, Category, PublishedYear) 
-            VALUES (@BookId, @Title, @Author, @CategoryId, @Category, @PublishedYear)";
+            VALUES (@BookId, @Title, @CategoryId, @Category, @PublishedYear, @Price)";
 
                 using (var connection = dataContext.CreateConnection())
                 {
@@ -90,10 +90,12 @@ namespace Webshop.Search.Persisstence
                     {
                         BookId = entity.BookId,
                         Title = entity.Title,
-                        Author = entity.Author,
+                      
                         CategoryId = entity.CategoryId,
                         Category = entity.Category,
-                        PublishedYear = entity.PublishedYear
+                        PublishedYear = entity.PublishedYear,
+                        Price = entity.Price
+
                     });
                 }
             }
@@ -186,10 +188,10 @@ namespace Webshop.Search.Persisstence
             UPDATE {this.TableName} 
             SET 
                 Title = @Title,
-                Author = @Author,
                 CategoryId = @CategoryId,
                 Category = @Category,
                 PublishedYear = @PublishedYear
+                Price = @Price
             WHERE BookId = @BookId";
 
                 using (var connection = dataContext.CreateConnection())
@@ -199,10 +201,11 @@ namespace Webshop.Search.Persisstence
                     {
                         BookId = entity.BookId,
                         Title = entity.Title,
-                        Author = entity.Author,
+                        
                         CategoryId = entity.CategoryId,
                         Category = entity.Category,
-                        PublishedYear = entity.PublishedYear
+                        PublishedYear = entity.PublishedYear,
+                        Price = entity.Price
                     });
                 }
             }
