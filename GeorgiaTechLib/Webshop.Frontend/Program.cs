@@ -1,6 +1,7 @@
 using Webshop.Frontend.Components;
 using Webshop.Frontend.Mocking;
 using Webshop.Tools.APIAccess;
+using Webshop.Tools.TempSearchLib;
 
 namespace Webshop.Frontend
 {
@@ -10,7 +11,7 @@ namespace Webshop.Frontend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           builder.Services.AddTransient<ISearchServiceClient<SearchTerm, Book[]>, MockSearchTermClient>();
+           builder.Services.AddTransient<ISearchServiceClient<SearchTerm, TempSearchObject[]>, MockSearchTermClient>();
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
