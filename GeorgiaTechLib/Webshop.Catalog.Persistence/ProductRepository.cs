@@ -8,6 +8,7 @@ using Webshop.Catalog.Application.Contracts.Persistence;
 using Webshop.Catalog.Domain.AggregateRoots;
 using Webshop.Data.Persistence;
 using Webshop.Domain.Common;
+using Webshop.Tools.TempSearchLib;
 
 namespace Webshop.Catalog.Persistence
 {
@@ -40,7 +41,8 @@ namespace Webshop.Catalog.Persistence
                     stock = entity.AmountInStock,
                     minstock = entity.MinStock
                 });
-
+                TempSearchRepos ts = new TempSearchRepos();
+                await ts.CreateAsync(entity);
             }
         }
 
