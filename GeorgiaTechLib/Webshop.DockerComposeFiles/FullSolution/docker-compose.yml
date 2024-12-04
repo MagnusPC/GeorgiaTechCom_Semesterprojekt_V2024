@@ -33,7 +33,7 @@ services:
     networks:
       - backtier
   paymentapi:
-   # the payment API
+    # the payment API
     container_name: webshop.payment
     image: brhv/webshoppaymentapi
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
     networks:
       - backtier  
   catalogapi:
-  # the catalog API - now local
+    # the catalog API - now local
     container_name: webshop.catalog
     build:
       context: ../..
@@ -50,10 +50,12 @@ services:
     restart: unless-stopped
     ports:
         - 8084:8080
+    environment:
+        - SERVER=webshopdatabase
     networks:
         - backtier
   customerapi:
-  # the customer API
+    # the customer API
     container_name: webshop.customer
     image: brhv/webshopcustomerapi
     restart: unless-stopped
@@ -62,7 +64,7 @@ services:
     networks:
         - backtier
   reviewapi:
-   # the review API, delete comments "from reviewapi-1" to add loadbalance
+    # the review API, delete comments "from reviewapi-1" to add loadbalance
     container_name: webshop.review
     image: brhv/webshopreviewservice
     restart: unless-stopped
@@ -72,19 +74,19 @@ services:
       - backtier
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
-# - reviewapi-1:
-#    # the 1 op 2 loadbalanced review API
-#     container_name: webshop.review.1
-#     image: brhv/webshopreviewservice
-#     restart: unless-stopped
-#     ports:
-#       - 8087:8080
-#     networks:
-#       - backtier
-#     environment:
-#       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
+  # reviewapi-1:
+    ## the 1 op 2 loadbalanced review API
+    #   container_name: webshop.review.1
+    #   image: brhv/webshopreviewservice
+    #   restart: unless-stopped
+    #   ports:
+    #     - 8087:8080
+    #   networks:
+    #     - backtier
+    #   environment:
+    #     - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   reviewgateway:
-   # the review APIgateway
+    # the review APIgateway
     container_name: webshop.reviewgateway
     image: brhv/webshopgateway
     restart: unless-stopped
@@ -93,7 +95,7 @@ services:
     networks:
       - backtier
   searchapi:
-  #the search api
+    #the search api - with postgres
     container_name: webshop.search
     build:
       context: ../..
@@ -101,10 +103,12 @@ services:
     restart: unless-stopped
     ports:
       - 8090:8080
+    environment: 
+      - SERVER=webshop.db.pg
     networks:
       - backtier
   sqlexpress:
-  #the sql server
+    #the sql server
     container_name: webshopdatabase
     image: mcr.microsoft.com/mssql/server:latest
     restart: unless-stopped
@@ -115,9 +119,30 @@ services:
         - SA_PASSWORD=PSU@password
         - MSSQL_PID=Express
     volumes:
-        - ./data:/var/opt/mssql/data
+        - ./mssql_georgia_data:/var/opt/mssql/data
     networks:
         - backtier
+  postgres:
+    # the postgres server
+    # alt link https://hub.docker.com/r/bitnami/postgresql
+    container_name: webshop.db.pg
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=dbseach
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PSU@password
+    volumes:
+      - ./postgres_georgia_data:/var/lib/postgresql/data
+    networks:
+      - backtier
+  # rabbitmq:
+    # # link https://hub.docker.com/r/bitnami/rabbitmq
+    #   image: 'bitnami/rabbitmq:latest'
+    #   networks:
+    #     - backtier
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus.monitor
@@ -138,8 +163,3 @@ services:
 networks:
   # The presence of these objects is sufficient to define them
   backtier: {}
-
-
-
-
-
