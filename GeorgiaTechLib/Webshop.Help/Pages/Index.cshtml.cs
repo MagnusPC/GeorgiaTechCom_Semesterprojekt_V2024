@@ -9,7 +9,9 @@ namespace Webshop.Help.Pages
         private readonly ILogger<IndexModel> _logger;
         private string MSconnectionString; //the server connectionstring without database
         private string PGconnectionString; //the connectionstring with database
-        private string server = "localhost";
+        private string MSserver = "localhost";
+        private string PGserver = "localhost";
+
         private List<string> Errors = new List<string>();
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
@@ -17,14 +19,20 @@ namespace Webshop.Help.Pages
             _logger = logger;
             this.MSconnectionString = config.GetConnectionString("MSConnection");
             this.PGconnectionString = config.GetConnectionString("PGConnection");
-            string newServer = Environment.GetEnvironmentVariable("SERVER");
-            
-            if (!string.IsNullOrEmpty(newServer))
+            string MSnewServer = Environment.GetEnvironmentVariable("MSSERVER");
+            string PGnewServer = Environment.GetEnvironmentVariable("PGSERVER");
+            System.Console.WriteLine("New server: " + PGnewServer);
+
+            if (!string.IsNullOrEmpty(PGnewServer))
             {
-                this.server = newServer;
+                this.MSserver = MSnewServer;
+                this.PGserver = PGnewServer;
+                
             }
-            this.MSconnectionString = this.MSconnectionString.Replace("{server}", this.server);
-            this.PGconnectionString = this.PGconnectionString.Replace("{server}", this.server);
+
+            this.MSconnectionString = this.MSconnectionString.Replace("{server}", this.MSserver);
+            this.PGconnectionString = this.PGconnectionString.Replace("{server}", this.PGserver);
+            System.Console.WriteLine("New server: " + this.PGconnectionString);
         }
 
         public void OnGet()
@@ -34,6 +42,10 @@ namespace Webshop.Help.Pages
 
         public IActionResult OnPost()
         {
+
+            // Postgres 
+            DatabaseService.InitializeDatabase(this.PGconnectionString);
+
             //create the database
             this.MSconnectionString = this.MSconnectionString + ";database=master";
             CreateDatabase();
@@ -46,8 +58,7 @@ namespace Webshop.Help.Pages
             this.MSconnectionString = this.MSconnectionString + ";database=PSUReviews"; //make sure they are created in the right database
             CreateReviewsTable();
            
-            // Postgres 
-            DatabaseService.InitializeDatabase(this.PGconnectionString);
+            
 
             TempData["errors"] = Errors;
             return Redirect("/?seed=1");

@@ -3,14 +3,18 @@ services:
   help:
   # SeQ is a framework for logging of exceptions etc
     container_name: webshophelp
-    image: brhv/webshophelp
+    #image: brhv/webshophelp
+    build:
+      context: ../..
+      dockerfile: ./Webshop.Help/Dockerfile
     restart: unless-stopped
     ports:
       - 8000:8080     
     networks:
       - backtier
     environment:
-      - SERVER=webshopdatabase
+      - MSSERVER=webshopdatabase
+      - PGSERVER=webshop.db.pg       
   seq:
   # SeQ is a framework for logging of exceptions etc
     container_name: SeQ
