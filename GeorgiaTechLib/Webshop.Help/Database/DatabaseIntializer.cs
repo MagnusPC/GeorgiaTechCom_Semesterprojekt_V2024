@@ -6,7 +6,7 @@ public class DatabaseService
 
     public DatabaseService(IConfiguration configuration)
     {
-        _connectionString = configuration.GetConnectionString("PGconnectionString");
+        _connectionString = configuration.GetConnectionString("PGconnection");
     }
 
     
@@ -14,8 +14,11 @@ public class DatabaseService
     {
         using var connection = new NpgsqlConnection(connectionString);
 
-        CreateDatabase(connection);
-
+        if (!connection.Database.Equals("psuwebshop"))
+        {
+            CreateDatabase(connection);
+        }
+        
         connection.ChangeDatabase("psuwebshop");
         
         CreateTable(connection);
