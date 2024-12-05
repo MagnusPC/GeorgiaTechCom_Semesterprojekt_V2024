@@ -25,6 +25,9 @@ public class DatabaseService
 
     private static void CreateDatabase(NpgsqlConnection connection)
     {
+        
+        connection.Open();
+
         string createDBcommand = "CREATE DATABASE psuwebshop";
 
         using var command = new NpgsqlCommand(createDBcommand, connection);

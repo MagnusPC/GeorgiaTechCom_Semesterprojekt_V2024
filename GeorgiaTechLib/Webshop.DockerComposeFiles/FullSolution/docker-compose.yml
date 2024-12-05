@@ -131,7 +131,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_DB=dbseach
+      - POSTGRES_DB=dbsearch
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=PSU@password
     volumes:

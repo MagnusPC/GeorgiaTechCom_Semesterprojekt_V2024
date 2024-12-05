@@ -47,7 +47,6 @@ namespace Webshop.Help.Pages
             CreateReviewsTable();
            
             // Postgres 
-            this.PGconnectionString = this.PGconnectionString + ";Database=postgres";
             DatabaseService.InitializeDatabase(this.PGconnectionString);
 
             TempData["errors"] = Errors;
