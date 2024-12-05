@@ -11,6 +11,9 @@ services:
       - backtier
     environment:
       - SERVER=webshopdatabase
+    depends_on:
+      - sqlexpress
+      - postgres
   seq:
     # SeQ is a framework for logging of exceptions etc
     container_name: SeQ
