@@ -6,8 +6,7 @@ public class DatabaseService
 
     public DatabaseService(IConfiguration configuration)
     {
-        string _connectionString = configuration.GetConnectionString("PGConnection");
-
+        _connectionString = configuration.GetConnectionString("PGconnectionString");
     }
 
 
@@ -17,10 +16,10 @@ public class DatabaseService
 
         CreateDatabase(connection);
 
-
-        string newConnectionString = connectionString + ";database=psusearch";
-        using var newConnection = new NpgsqlConnection(newConnectionString);
-        System.Console.WriteLine(newConnection.ConnectionString);
+        connection.ChangeDatabase("psuwebshop");
+        
+        CreateTable(connection);
+        SeedDatabase(connection);
 
         CreateTable(newConnection);
         SeedDatabase(newConnection);

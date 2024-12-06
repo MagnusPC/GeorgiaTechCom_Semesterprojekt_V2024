@@ -14,7 +14,10 @@ services:
       - backtier
     environment:
       - MSSERVER=webshopdatabase
-      - PGSERVER=webshop.db.pg       
+      - PGSERVER=webshop.db.pg   
+    depends_on:
+      - sqlexpress
+      - postgres
   seq:
   # SeQ is a framework for logging of exceptions etc
     container_name: SeQ
