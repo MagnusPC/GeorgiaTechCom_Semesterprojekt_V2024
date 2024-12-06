@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Webshop.Tools.Messaging
+﻿namespace Webshop.Tools.Messaging
 {
     public class Message<T>
     {
@@ -19,5 +17,5 @@ namespace Webshop.Tools.Messaging
         public string MessageType { get; set; }
         public T Content { get; set; }
         public string? CorrelationId { get; set; }
-}
+    }
 }

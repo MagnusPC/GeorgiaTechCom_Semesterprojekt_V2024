@@ -25,8 +25,14 @@ namespace Webshop.SearchDBAccess.API
             app.UseHttpsRedirection();
             app.UseAuthorization();
 
-            app.MapPost("/sync", (HttpContext httpContext, Message<CRUDWrapper<List<Book>>> msg) =>
+            app.MapPost("/PostUpdate", (HttpContext httpContext, Message<CRUDWrapper<List<Book>>> msg) =>
             {
+                Console.WriteLine("Recieved post: " + msg);
+                foreach (var item in msg.Content.Data)
+                {
+                    Console.WriteLine($"{item}");
+                }
+
                 DBAccess dBAccess = new DBAccess();
 
                 dBAccess.UpdateDatabase(msg);
