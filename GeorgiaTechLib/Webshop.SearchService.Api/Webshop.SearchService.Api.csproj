@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Webshop.Search.Domain\Webshop.Search.Domain.csproj" />
+    <ProjectReference Include="..\Webshop.Search.Persisstence\Webshop.Search.Persistence.csproj" />
     <ProjectReference Include="..\Webshop.Tools.Messaging\Webshop.Tools.Messaging.csproj" />
   </ItemGroup>
 

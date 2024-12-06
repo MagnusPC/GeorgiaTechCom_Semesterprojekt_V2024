@@ -20,7 +20,8 @@ namespace Webshop.Help.Pages
             this.MSconnectionString = config.GetConnectionString("MSConnection");
             this.PGconnectionString = config.GetConnectionString("PGConnection");
             string MSnewServer = Environment.GetEnvironmentVariable("MSSERVER");
-            string PGnewServer = Environment.GetEnvironmentVariable("PGSERVER");
+            string PGnewServer = Environment.GetEnvironmentVariable("PGSERVER"); 
+            Console.WriteLine($"MSSERVER: {MSnewServer}, PGSERVER: {PGnewServer}");
             System.Console.WriteLine("New server: " + PGnewServer);
 
             if (!string.IsNullOrEmpty(PGnewServer))

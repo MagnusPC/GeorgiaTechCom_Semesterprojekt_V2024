@@ -3,6 +3,9 @@ using System.Text.Json;
 using Webshop.Search.Domain;
 using Webshop.Tools.Messaging;
 
+using Webshop.Search.Persisstence;
+using Webshop.Data.Persistence;
+
 namespace Webshop.SearchService.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -14,7 +17,7 @@ namespace Webshop.SearchService.Api.Controllers
 
         List<State> callbacks;
 
-        public class State
+    public class State
         {
             public string CorrelationId { get; set; }
             public List<SearchResult>? Content { get; set; }
@@ -76,6 +79,7 @@ namespace Webshop.SearchService.Api.Controllers
             return NoContent();
 
         }
+
     }
 }
 

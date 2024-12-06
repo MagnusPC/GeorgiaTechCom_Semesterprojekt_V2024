@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Extensions.Logging;
 using Webshop.Application.Contracts.Persistence;
 using Webshop.Data.Persistence;
 using Webshop.Domain.Common;
@@ -8,12 +7,13 @@ using Webshop.Search.Persistence.Contracts;
 
 namespace Webshop.Search.Persisstence
 {
+
     public class SearchRepository : BaseRepository<PGDataContext>, ISearchRepository
     {
-        private readonly ILogger<SearchRepository> _logger;
-        public SearchRepository(PGDataContext context, ILogger<SearchRepository> logger) : base(TableNames.Search.SEARCHTABLE, context)
+        
+        public SearchRepository(PGDataContext context) : base(TableNames.Search.SEARCHTABLE, context)
         {
-            this._logger = logger;
+         
         }
         // Serch operations
         public async Task<IEnumerable<SearchResult>> GetFromTextInput(string searchtext)
@@ -21,7 +21,7 @@ namespace Webshop.Search.Persisstence
         {
             try
             {
-                string sql = $"SELECT * FROM {this.TableName} WHERE Title LIKE @searchText OR Author LIKE @searchText OR Category LIKE @searchText";
+                string sql = $"SELECT * FROM {this.TableName} WHERE Title ILIKE @searchText OR Category ILIKE @searchText";
                 using (var connection = dataContext.CreateConnection())
                 {
 
@@ -39,7 +39,7 @@ namespace Webshop.Search.Persisstence
             catch (Exception ex)
             {
 
-                this._logger.LogCritical(ex, ex.Message);
+                
                 return new List<Domain.SearchResult>();
             }
         }
@@ -68,7 +68,7 @@ namespace Webshop.Search.Persisstence
             }
             catch (Exception ex)
             {
-                this._logger.LogCritical(ex, ex.Message);
+               
                 return new List<Domain.SearchResult>();
             }
         }
@@ -101,7 +101,7 @@ namespace Webshop.Search.Persisstence
             }
             catch (Exception ex)
             {
-                this._logger.LogCritical(ex, ex.Message);
+                
                 throw new Exception("Error in inserting entry into search database", ex);
             }
 
@@ -129,8 +129,7 @@ namespace Webshop.Search.Persisstence
                 }
             }
             catch (Exception ex)
-            {
-                this._logger.LogCritical(ex, ex.Message);
+            { 
                 return Result.Fail<Domain.SearchResult>(Errors.General.FromException(ex));
             }
 
@@ -156,7 +155,7 @@ namespace Webshop.Search.Persisstence
             }
             catch (Exception ex)
             {
-                this._logger.LogCritical(ex, ex.Message);
+               
                 return new List<Domain.SearchResult>();
             }
         }
@@ -172,7 +171,7 @@ namespace Webshop.Search.Persisstence
             }
             catch (Exception ex)
             {
-                this._logger.LogCritical(ex, ex.Message);
+               
             }
         }
 
@@ -212,7 +211,7 @@ namespace Webshop.Search.Persisstence
             catch (Exception ex)
             {
                 // Log any exception that occurs
-                this._logger.LogCritical(ex, ex.Message);
+               
                 throw new Exception("Error in updating search result in the database", ex);
             }
         }

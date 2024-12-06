@@ -78,6 +78,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Tools.Messaging", "Webshop.Tools.Messaging\Webshop.Tools.Messaging.csproj", "{93FA179A-5AF8-4C49-879E-0A16299479CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.SearchService.Api", "Webshop.SearchService.Api\Webshop.SearchService.Api.csproj", "{DC14445D-E16C-4C73-811C-782F425FFDAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD} = {7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Frontend", "Webshop.Frontend\Webshop.Frontend.csproj", "{AF63A7E2-6FE6-4076-9517-E88B5F873408}"
 EndProject
@@ -85,9 +88,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Tools.APIAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Persistence", "Webshop.Search.Persisstence\Webshop.Search.Persistence.csproj", "{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Search.Application", "Webshop.Search.Application\Webshop.Search.Application.csproj", "{86210646-9845-4EB4-9071-13B6690DD1AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Application", "Webshop.Search.Application\Webshop.Search.Application.csproj", "{86210646-9845-4EB4-9071-13B6690DD1AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.Search.Domain", "Webshop.Search.Domain\Webshop.Search.Domain.csproj", "{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Domain", "Webshop.Search.Domain\Webshop.Search.Domain.csproj", "{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E9095794-6DE3-496D-B4A6-58066DFDF4CD}"
 EndProject

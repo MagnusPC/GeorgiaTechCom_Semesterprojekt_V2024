@@ -12,14 +12,15 @@ namespace Webshop.Frontend
             var builder = WebApplication.CreateBuilder(args);
 
            builder.Services.AddTransient<ISearchServiceClient<SearchTerm, SearchResult[]>, MockSearchTermClient>();
+         
 
-          
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
            
             var app = builder.Build();
+
 
 
          
