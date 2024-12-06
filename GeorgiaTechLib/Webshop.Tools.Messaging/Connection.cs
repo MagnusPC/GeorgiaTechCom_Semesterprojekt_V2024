@@ -3,11 +3,11 @@ using System.Text;
 
 namespace Webshop.Tools.Messaging
 {
-    public class Connection
+    public abstract class Connection
     {
         protected IConnection? connection;
         protected IChannel? channel;
-        protected readonly string queue;
+        protected string queue;
         protected readonly string hostname;
 
         public Connection(string _queue, string _hostname)
@@ -21,9 +21,6 @@ namespace Webshop.Tools.Messaging
             ConnectionFactory factory = new() { HostName = hostname };
             connection = await factory.CreateConnectionAsync();
             channel = await connection.CreateChannelAsync();
-
-            await channel.QueueDeclareAsync(queue: queue, durable: durable, exclusive: exclusive, autoDelete: autoDelete,
-                arguments: null);
         }
     }
 }

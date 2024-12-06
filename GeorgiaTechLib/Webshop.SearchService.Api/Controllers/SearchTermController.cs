@@ -2,6 +2,8 @@
 using System.Text.Json;
 using Webshop.Search.Domain;
 using Webshop.Tools.Messaging;
+using Webshop.Tools.Messaging.Consumers;
+using Webshop.Tools.Messaging.Producers;
 
 using Webshop.Search.Persisstence;
 using Webshop.Data.Persistence;

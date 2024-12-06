@@ -49,7 +49,7 @@ services:
     networks:
       - backtier  
   catalogapi:
-  # the catalog API - now local
+    # the catalog API - now local
     container_name: webshop.catalog
     build:
       context: ../..
@@ -62,7 +62,7 @@ services:
     networks:
         - backtier
   customerapi:
-  # the customer API
+    # the customer API
     container_name: webshop.customer
     image: brhv/webshopcustomerapi
     restart: unless-stopped
@@ -93,7 +93,7 @@ services:
   #   environment:
   #     - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
   reviewgateway:
-   # the review APIgateway
+    # the review APIgateway
     container_name: webshop.reviewgateway
     image: brhv/webshopgateway
     restart: unless-stopped
@@ -115,7 +115,7 @@ services:
     networks:
       - backtier
   sqlexpress:
-  #the sql server
+    #the sql server
     container_name: webshopdatabase
     image: mcr.microsoft.com/mssql/server:latest
     restart: unless-stopped
@@ -170,8 +170,3 @@ services:
 networks:
   # The presence of these objects is sufficient to define them
   backtier: {}
-
-
-
-
-
