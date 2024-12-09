@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Seed", "Database S
 		Customers.sql = Customers.sql
 		Product.sql = Product.sql
 		ProductCategory.sql = ProductCategory.sql
+		ProductSearch.sql = ProductSearch.sql
 		Seed Demo Customers.sql = Seed Demo Customers.sql
 	EndProjectSection
 EndProject
@@ -80,6 +81,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Tools.Messaging", "Webshop.Tools.Messaging\Webshop.Tools.Messaging.csproj", "{93FA179A-5AF8-4C49-879E-0A16299479CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.SearchService.Api", "Webshop.SearchService.Api\Webshop.SearchService.Api.csproj", "{DC14445D-E16C-4C73-811C-782F425FFDAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD} = {7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Frontend", "Webshop.Frontend\Webshop.Frontend.csproj", "{AF63A7E2-6FE6-4076-9517-E88B5F873408}"
 EndProject
@@ -92,6 +96,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.SearchDBAccess.API", "Webshop.SearchDBAccess.API\Webshop.SearchDBAccess.API.csproj", "{6AD6543C-7955-4251-BAAD-8DD96530A2CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop.SynchronizeToSearchDB", "Webshop.SynchronizeToSearchDB\Webshop.SynchronizeToSearchDB.csproj", "{3B01C70D-AE5F-4C1F-BE0D-E3B8C89F86F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Persistence", "Webshop.Search.Persisstence\Webshop.Search.Persistence.csproj", "{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Application", "Webshop.Search.Application\Webshop.Search.Application.csproj", "{86210646-9845-4EB4-9071-13B6690DD1AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webshop.Search.Domain", "Webshop.Search.Domain\Webshop.Search.Domain.csproj", "{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E9095794-6DE3-496D-B4A6-58066DFDF4CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -223,6 +234,22 @@ Global
 		{3B01C70D-AE5F-4C1F-BE0D-E3B8C89F86F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B01C70D-AE5F-4C1F-BE0D-E3B8C89F86F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B01C70D-AE5F-4C1F-BE0D-E3B8C89F86F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86210646-9845-4EB4-9071-13B6690DD1AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86210646-9845-4EB4-9071-13B6690DD1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86210646-9845-4EB4-9071-13B6690DD1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86210646-9845-4EB4-9071-13B6690DD1AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9095794-6DE3-496D-B4A6-58066DFDF4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9095794-6DE3-496D-B4A6-58066DFDF4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9095794-6DE3-496D-B4A6-58066DFDF4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9095794-6DE3-496D-B4A6-58066DFDF4CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -264,6 +291,9 @@ Global
 		{96E1CF61-E221-451B-9A1D-FE9337068D7D} = {07CFB857-FCBF-42EE-B38E-BD93BD53C647}
 		{6AD6543C-7955-4251-BAAD-8DD96530A2CA} = {98BEA6C6-7D0C-4A74-86D3-804C1C4A952A}
 		{3B01C70D-AE5F-4C1F-BE0D-E3B8C89F86F9} = {98BEA6C6-7D0C-4A74-86D3-804C1C4A952A}
+		{7FA85E6A-8C7C-498B-8B3D-1BFA211598CD} = {1E6BED77-EB85-4EC8-BE0F-7E8A57F3D4AF}
+		{86210646-9845-4EB4-9071-13B6690DD1AF} = {774CCD7D-ED3B-4D75-8A7F-CEFC745765DB}
+		{B1E3DD26-5B6B-4C7E-B3F3-7EA381A19BBC} = {774CCD7D-ED3B-4D75-8A7F-CEFC745765DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {822AAF83-FC8D-42BE-9726-63314F24EB10}

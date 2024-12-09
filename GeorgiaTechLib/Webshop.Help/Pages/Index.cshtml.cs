@@ -7,22 +7,33 @@ namespace Webshop.Help.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private string connectionString; //the server connectionstring without database
-        private string mainconnectionString;
-        private string server = "localhost";
+        private string MSconnectionString; //the server connectionstring without database
+        private string PGconnectionString; //the connectionstring with database
+        private string MSserver = "localhost";
+        private string PGserver = "localhost";
+
         private List<string> Errors = new List<string>();
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
         {
             _logger = logger;
-            this.connectionString = config.GetConnectionString("DefaultConnection");
-            this.mainconnectionString = this.connectionString;
-            string newServer = Environment.GetEnvironmentVariable("SERVER");
-            if (!string.IsNullOrEmpty(newServer))
+            this.MSconnectionString = config.GetConnectionString("MSConnection");
+            this.PGconnectionString = config.GetConnectionString("PGConnection");
+            string MSnewServer = Environment.GetEnvironmentVariable("MSSERVER");
+            string PGnewServer = Environment.GetEnvironmentVariable("PGSERVER"); 
+            Console.WriteLine($"MSSERVER: {MSnewServer}, PGSERVER: {PGnewServer}");
+            System.Console.WriteLine("New server: " + PGnewServer);
+
+            if (!string.IsNullOrEmpty(PGnewServer))
             {
-                this.server = newServer;
+                this.MSserver = MSnewServer;
+                this.PGserver = PGnewServer;
+                
             }
-            this.mainconnectionString = this.mainconnectionString.Replace("{server}", this.server);
+
+            this.MSconnectionString = this.MSconnectionString.Replace("{server}", this.MSserver);
+            this.PGconnectionString = this.PGconnectionString.Replace("{server}", this.PGserver);
+            System.Console.WriteLine("New server: " + this.PGconnectionString);
         }
 
         public void OnGet()
@@ -32,29 +43,36 @@ namespace Webshop.Help.Pages
 
         public IActionResult OnPost()
         {
+
+            // Postgres 
+            DatabaseService.InitializeDatabase(this.PGconnectionString);
+
             //create the database
-            this.connectionString = this.mainconnectionString + ";database=master";
+            this.MSconnectionString = this.MSconnectionString + ";database=master";
             CreateDatabase();
             CreateReviewDatabase();//creating psureviews database
-            this.connectionString = this.mainconnectionString + ";database=psuwebshop"; //make sure they are created in the right database
+            this.MSconnectionString = this.MSconnectionString + ";database=psuwebshop"; //make sure they are created in the right database
             CreateCategoryTable();
             CreateCustomerTable();
             CreateProductTable();
             CreateProductCategoryTable();
-            this.connectionString = this.mainconnectionString + ";database=PSUReviews"; //make sure they are created in the right database
+            this.MSconnectionString = this.MSconnectionString + ";database=PSUReviews"; //make sure they are created in the right database
             CreateReviewsTable();
+           
+            
+
             TempData["errors"] = Errors;
             return Redirect("/?seed=1");
         }
 
         private void CreateDatabase()
         {            
-            ExecuteSQL("CREATE DATABASE psuwebshop", this.connectionString);           
+            ExecuteSQL("CREATE DATABASE psuwebshop", this.MSconnectionString);           
         }
 
         private void CreateReviewDatabase()
         {
-            ExecuteSQL("CREATE DATABASE PSUReviews", this.connectionString);
+            ExecuteSQL("CREATE DATABASE PSUReviews", this.MSconnectionString);
         }
 
         private void CreateReviewsTable()
@@ -69,8 +87,8 @@ namespace Webshop.Help.Pages
 
             string alterSql = "ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [Created]";
             
-            ExecuteSQL(sql, this.connectionString);
-            ExecuteSQL(alterSql, this.connectionString);
+            ExecuteSQL(sql, this.MSconnectionString);
+            ExecuteSQL(alterSql, this.MSconnectionString);
         }
 
         private void CreateCategoryTable()
@@ -85,7 +103,7 @@ namespace Webshop.Help.Pages
             "[Id] ASC" +
             ")" +
             ")";
-            ExecuteSQL(sql, this.connectionString);
+            ExecuteSQL(sql, this.MSconnectionString);
         }
 
         private void CreateCustomerTable()
@@ -105,7 +123,7 @@ namespace Webshop.Help.Pages
             "[Id] ASC" +
             ")" +
             ")";
-            ExecuteSQL(sql, this.connectionString);
+            ExecuteSQL(sql, this.MSconnectionString);
         }
 
         private void CreateProductTable()
@@ -124,7 +142,7 @@ namespace Webshop.Help.Pages
             "[Id] ASC" +
             ")" +
             ")";
-            ExecuteSQL(sql, this.connectionString);
+            ExecuteSQL(sql, this.MSconnectionString);
         }
 
         private void CreateProductCategoryTable()
@@ -138,7 +156,7 @@ namespace Webshop.Help.Pages
             "[CategoryId] ASC" +
             ")" +
             ")";
-            ExecuteSQL(sql, this.connectionString);
+            ExecuteSQL(sql, this.MSconnectionString);
         }
 
         private void ExecuteSQL(string sql, string localConnectionString)

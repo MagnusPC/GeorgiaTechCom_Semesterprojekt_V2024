@@ -1,3 +1,5 @@
+using Webshop.Data.Persistence;
+using Webshop.Search.Persisstence;
 
 namespace Webshop.SearchService.Api
 {
@@ -7,12 +9,16 @@ namespace Webshop.SearchService.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddSingleton<PGDataContext>();
+            builder.Services.AddScoped<SearchRepository>();
+
+
             // Add services to the container.
             builder.Services.AddAuthorization();
 
             builder.Services.AddControllers();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Swagger/OpenAPI configuration
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

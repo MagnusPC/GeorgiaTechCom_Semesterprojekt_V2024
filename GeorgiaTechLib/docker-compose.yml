@@ -59,6 +59,8 @@ services:
         - 8085:8080
     networks:
         - backtier
+    environment:
+    - SERVER=webshopdatabase # fixes customer seed?
   reviewapi:
    # the review API
     container_name: webshop.review
@@ -70,6 +72,19 @@ services:
       - backtier
     environment:
       - connectionstring=Server=webshopdatabase;Database=PSUReviews;User Id=sa;Password=PSU@password
+  searchapi:
+  # The search API
+   container_name: webshop.search
+   build: 
+    context: .
+    dockerfile: ./Webshop.SearchService.Api/Dockerfile
+   restart: unless-stopped
+   ports:
+    - 8087:8080
+   networks: 
+    - backtier
+   environment: 
+    - SERVER=webshopdatabase
   sqlexpress:
   #the sql server
     container_name: webshopdatabase

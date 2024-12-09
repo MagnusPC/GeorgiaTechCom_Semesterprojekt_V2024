@@ -7,10 +7,10 @@ using Webshop.Review.Application.Features.GetAggregatedByProduct;
 
 namespace Webshop.Review.Persistence
 {
-    public class ReviewRepository : BaseRepository, IReviewRepository
+    public class ReviewRepository : BaseRepository<MSDataContext>, IReviewRepository
     {
         private readonly ILogger<ReviewRepository> _logger;
-        public ReviewRepository(DataContext dataContext, ILogger<ReviewRepository> logger) : base(TableNames.Review.REVIEWTABLE, dataContext)
+        public ReviewRepository(MSDataContext dataContext, ILogger<ReviewRepository> logger) : base(TableNames.Review.REVIEWTABLE, dataContext)
         {
             this._logger = logger;
         }

@@ -1,5 +1,6 @@
 using Webshop.Frontend.Components;
 using Webshop.Frontend.Mocking;
+using Webshop.Search.Domain;
 using Webshop.Tools.APIAccess;
 
 namespace Webshop.Frontend
@@ -10,13 +11,19 @@ namespace Webshop.Frontend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           builder.Services.AddTransient<ISearchServiceClient<SearchTerm, Book[]>, MockSearchTermClient>();
+           builder.Services.AddTransient<ISearchServiceClient<SearchTerm, SearchResult[]>, MockSearchTermClient>();
+         
+
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-
+           
             var app = builder.Build();
+
+
+
+         
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -25,6 +32,8 @@ namespace Webshop.Frontend
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
 
             app.UseHttpsRedirection();
 

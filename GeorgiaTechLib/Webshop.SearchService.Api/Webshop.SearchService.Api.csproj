@@ -4,14 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>fe1ca07d-0ffe-4af3-a3d4-35fd3dce5b60</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Webshop.Search.Domain\Webshop.Search.Domain.csproj" />
+    <ProjectReference Include="..\Webshop.Search.Persisstence\Webshop.Search.Persistence.csproj" />
     <ProjectReference Include="..\Webshop.Tools.Messaging\Webshop.Tools.Messaging.csproj" />
   </ItemGroup>
 
